@@ -71,7 +71,14 @@ function paramsTableBody (schema) {
    // TODO: sort validations by required
    if (schema.isJoi) {
       const children = get(schema, '_inner.children', []);
-      body.children = children.map(child => paramsRow(child.schema, child.key));
+      body.children = children.map(child => {
+         const row = [];
+         row.push(paramsRow(child.schema, child.key));
+         
+         const innerChildren = get(child.schema, '_inner.children', []);
+         const inner = innerChildren.map(innerchild => paramsRow(innerchild.schema, child.key + '.' + innerchild.key));
+         return row.concat(inner);
+      });
    } else {
       body.children = Object.keys(schema).map(k => paramsRow(schema[k], k));
    }
