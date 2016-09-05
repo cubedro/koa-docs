@@ -65,20 +65,23 @@ function paramsHeader (schema, type, validations) {
    return header;
 }
 
+function getChildrenRecursive (schema, prefix = '') {
+   const children = get(schema, '_inner.children', []);
+   const result = children.map(child => {
+      const row = [];
+      row.push(paramsRow(child.schema, prefix + child.key));
+      
+      const innerChildren = getChildrenRecursive(child.schema, child.key + '.');
+      return row.concat(inner);
+   });
+}
+
 function paramsTableBody (schema) {
    const body = m('tbody');
 
    // TODO: sort validations by required
    if (schema.isJoi) {
-      const children = get(schema, '_inner.children', []);
-      body.children = children.map(child => {
-         const row = [];
-         row.push(paramsRow(child.schema, child.key));
-         
-         const innerChildren = get(child.schema, '_inner.children', []);
-         const inner = innerChildren.map(innerchild => paramsRow(innerchild.schema, child.key + '.' + innerchild.key));
-         return row.concat(inner);
-      });
+      body.children = getChildrenRecursive(schema, '');
    } else {
       body.children = Object.keys(schema).map(k => paramsRow(schema[k], k));
    }
