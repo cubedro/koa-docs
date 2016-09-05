@@ -65,7 +65,7 @@ function paramsHeader (schema, type, validations) {
    return header;
 }
 
-function getChildrenRecursive (schema, prefix = '') {
+function getChildrenRecursive (schema, prefix) {
    const children = get(schema, '_inner.children', []);
    const result = children.map(child => {
       const row = [];
