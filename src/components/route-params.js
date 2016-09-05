@@ -71,7 +71,7 @@ function getChildrenRecursive (schema, prefix) {
       const row = [];
       row.push(paramsRow(child.schema, prefix + child.key));
       
-      const inner = getChildrenRecursive(child.schema, child.key + '.');
+      const inner = getChildrenRecursive(child.schema, prefix + child.key + '.');
       return row.concat(inner);
    });
 }
