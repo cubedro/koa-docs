@@ -11,6 +11,7 @@ module.exports = function routeParams (route) {
       paramsTable(route.validate, 'query'),
       paramsTable(route.validate, 'params'),
       paramsTable(route.validate, 'body'),
+      paramsTable(route.validate, 'passport'),
       paramsTable(route.validate, 'output')
    ];
 };
