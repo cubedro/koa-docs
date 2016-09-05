@@ -6,10 +6,10 @@ const tpl = require('./template');
 function createMiddleware (route, opts) {
    const html = render(tpl(opts));
 
-   return async function docs (ctx, next) {
+   return function docs (ctx, next) {
       // Skip all requests other then a GET request at specified route
       if (ctx.method !== 'get' && ctx.url.indexOf(route) !== 0) {
-         return await next();
+         return next();
       }
 
       ctx.body = html;
