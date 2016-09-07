@@ -4,8 +4,8 @@ const m = require('mithril');
 const path = require('path');
 const fs = require('fs');
 
-const bootstrap = file => `http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/${file}`;
-const swatch = file => `https://maxcdn.bootstrapcdn.com/bootswatch/3.3.5/${file}`;
+const bootstrap = file => `//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/${file}`;
+const swatch = file => `//maxcdn.bootstrapcdn.com/bootswatch/3.3.5/${file}`;
 
 const doctype = '<!DOCTYPE html>';
 const charset = '<meta charset="utf-8">';
@@ -60,7 +60,7 @@ module.exports = function renderTemplate (opts) {
             ]),
 
             // Scripts
-            m('script', { src: 'http://code.jquery.com/jquery-2.1.4.min.js' }),
+            m('script', { src: '//code.jquery.com/jquery-2.1.4.min.js' }),
             m('script', { src: bootstrap('js/bootstrap.min.js') }),
             m.trust(`<script>${js}</script>`)
          ])
